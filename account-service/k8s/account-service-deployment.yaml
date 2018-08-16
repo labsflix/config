@@ -1,0 +1,42 @@
+apiVersion: apps/v1beta2 # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: account-service-deployment
+  labels:
+    app: account-service-deployment
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: account-service-deployment
+  template:
+    metadata:
+      labels:
+        app: account-service-deployment
+    spec:
+      containers:
+      - name: account-service-deployment
+        image: dtlabs/account-service:1.0
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: k8s
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "0.25"
+          limits:
+            memory: "1Gi"
+            cpu: "0.5"
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 20

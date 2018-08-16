@@ -1,0 +1,43 @@
+apiVersion: apps/v1beta2 # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: contents-service-deployment
+  labels:
+    app: contents-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: contents-service
+  template:
+    metadata:
+      labels:
+        app: contents-service
+    spec:
+      # restartPolicy: Always
+      containers:
+      - name: contents-service
+        image: dtlabs/contents-service:2.0
+        ports:
+        - containerPort: 8082
+        imagePullPolicy: Always
+        env:
+        # - name: SPRING_PROFILES_ACTIVE
+        #   value: k8s
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "0.25"
+          limits:
+            memory: "1Gi"
+            cpu: "0.5"
+        # readinessProbe:
+        #   tcpSocket:
+        #     port: 8082
+        #   initialDelaySeconds: 5
+        #   periodSeconds: 10
+        # livenessProbe:
+        #   tcpSocket:
+        #     port: 8082
+        #   initialDelaySeconds: 15
+        #   periodSeconds: 20
