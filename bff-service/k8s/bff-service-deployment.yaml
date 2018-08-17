@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: bff-service-deployment
-        image: dtlabs/bff-service:latest
+        image: dtlabs/bff-service:1.0
         ports:
         - containerPort: 8080
         imagePullPolicy: Always
