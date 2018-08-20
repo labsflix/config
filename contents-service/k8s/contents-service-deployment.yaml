@@ -23,12 +23,6 @@ spec:
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: k8s
-        - name: MYSQL_DATABASE
-          value: contents_db
-        - name: MYSQL_PASSWORD
-          value: ThePassword
-        - name: MYSQL_USER
-          value: labsflixuser
         resources:
           requests:
             memory: "256Mi"
