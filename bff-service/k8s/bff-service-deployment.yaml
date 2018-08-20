@@ -3,19 +3,19 @@ kind: Deployment
 metadata:
   name: bff-service-deployment
   labels:
-    app: bff-service-deployment
+    app: bff-service
 spec:
-  replicas: 10
+  replicas: 1
   selector:
     matchLabels:
-      app: bff-service-deployment
+      app: bff-service
   template:
     metadata:
       labels:
-        app: bff-service-deployment
+        app: bff-service
     spec:
       containers:
-      - name: bff-service-deployment
+      - name: bff-service
         image: dtlabs/bff-service:1.0
         ports:
         - containerPort: 8080
@@ -30,13 +30,3 @@ spec:
           limits:
             memory: "1Gi"
             cpu: "0.5"
-        readinessProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        livenessProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 15
-          periodSeconds: 20

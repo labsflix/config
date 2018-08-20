@@ -14,16 +14,21 @@ spec:
       labels:
         app: contents-service
     spec:
-      # restartPolicy: Always
       containers:
       - name: contents-service
-        image: dtlabs/contents-service:2.0
+        image: dtlabs/contents-service:1.0
         ports:
-        - containerPort: 8082
+        - containerPort: 8080
         imagePullPolicy: Always
         env:
-        # - name: SPRING_PROFILES_ACTIVE
-        #   value: k8s
+        - name: SPRING_PROFILES_ACTIVE
+          value: k8s
+        - name: MYSQL_DATABASE
+          value: contents_db
+        - name: MYSQL_PASSWORD
+          value: ThePassword
+        - name: MYSQL_USER
+          value: labsflixuser
         resources:
           requests:
             memory: "256Mi"
@@ -31,13 +36,3 @@ spec:
           limits:
             memory: "1Gi"
             cpu: "0.5"
-        # readinessProbe:
-        #   tcpSocket:
-        #     port: 8082
-        #   initialDelaySeconds: 5
-        #   periodSeconds: 10
-        # livenessProbe:
-        #   tcpSocket:
-        #     port: 8082
-        #   initialDelaySeconds: 15
-        #   periodSeconds: 20

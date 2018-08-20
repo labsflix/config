@@ -5,8 +5,8 @@ metadata:
 spec:
   ports:
   - name: "http"
-    port: 8082
-    targetPort: 8082
+    port: 8080
+    targetPort: 8080
   selector:
     app: contents-service
   type: NodePort

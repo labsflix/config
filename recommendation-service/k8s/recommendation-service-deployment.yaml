@@ -3,19 +3,19 @@ kind: Deployment
 metadata:
   name: recommendation-service-deployment
   labels:
-    app: recommendation-service-deployment
+    app: recommendation-service
 spec:
-  replicas: 10
+  replicas: 1
   selector:
     matchLabels:
-      app: recommendation-service-deployment
+      app: recommendation-service
   template:
     metadata:
       labels:
-        app: recommendation-service-deployment
+        app: recommendation-service
     spec:
       containers:
-      - name: recommendation-service-deployment
+      - name: recommendation-service
         image: dtlabs/recommendation-service:1.0
         ports:
         - containerPort: 8080
@@ -30,13 +30,3 @@ spec:
           limits:
             memory: "1Gi"
             cpu: "0.5"
-        readinessProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        livenessProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 15
-          periodSeconds: 20

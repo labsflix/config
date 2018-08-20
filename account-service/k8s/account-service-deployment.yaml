@@ -3,19 +3,19 @@ kind: Deployment
 metadata:
   name: account-service-deployment
   labels:
-    app: account-service-deployment
+    app: account-service
 spec:
-  replicas: 10
+  replicas: 1
   selector:
     matchLabels:
-      app: account-service-deployment
+      app: account-service
   template:
     metadata:
       labels:
-        app: account-service-deployment
+        app: account-service
     spec:
       containers:
-      - name: account-service-deployment
+      - name: account-service
         image: dtlabs/account-service:1.0
         ports:
         - containerPort: 8080
@@ -30,13 +30,3 @@ spec:
           limits:
             memory: "1Gi"
             cpu: "0.5"
-        readinessProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        livenessProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 15
-          periodSeconds: 20
