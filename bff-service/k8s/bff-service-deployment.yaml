@@ -30,3 +30,16 @@ spec:
           limits:
             memory: "1Gi"
             cpu: "0.5"
+        # readinessProbe: 
+        #   httpGet:
+        #     path: /v1/promotions
+        #     port: 8080
+        #   initialDelaySeconds: 30 
+        #   periodSeconds: 10 
+        # livenessProbe: 
+        #   exec:
+        #     command:
+        #     - cat
+        #     - bff-service
+        #   initialDelaySeconds: 60
+        #   periodSeconds: 5
