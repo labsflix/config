@@ -26,8 +26,8 @@ spec:
     - destination:
         host: recommendation-service
         subset: v2
-      weight: 90
+      weight:50
     - destination:
         host: recommendation-service
         subset: v3
-      weight: 10
+      weight: 50
