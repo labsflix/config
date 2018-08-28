@@ -4,7 +4,7 @@ metadata:
   labels:
     app: recommendation-service
   name: 'recommendation-service-deployment-${parameters.app_new_version}'
-  namespace: ${parameters.namespace}
+  namespace: '${parameters.namespace}'
 spec:
   replicas: 1
   selector:
