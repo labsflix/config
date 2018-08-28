@@ -1,34 +1,34 @@
-- apiVersion: apps/v1beta2
-  kind: Deployment
-  metadata:
-    labels:
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  labels:
+    app: recommendation-service
+  name: 'recommendation-service-deployment-${parameters.app_new_version}'
+  namespace: 'ns-zcp-edu-${parameters.namespace_number}'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
       app: recommendation-service
-    name: 'recommendation-service-deployment-${parameters.app_new_version}'
-    namespace: 'ns-zcp-edu-${parameters.namespace_number}'
-  spec:
-    replicas: 1
-    selector:
-      matchLabels:
+  template:
+    metadata:
+      labels:
         app: recommendation-service
-    template:
-      metadata:
-        labels:
-          app: recommendation-service
-          version: '${parameters.app_new_version}'
-      spec:
-        containers:
-          - env:
-              - name: SPRING_PROFILES_ACTIVE
-                value: k8s
-            image: 'dtlabs/recommendation-service:${parameters.image_tag}'
-            imagePullPolicy: Always
-            name: recommendation-service
-            ports:
-              - containerPort: 8080
-            resources:
-              limits:
-                cpu: '0.5'
-                memory: 1Gi
-              requests:
-                cpu: '0.25'
-                memory: 256Mi
+        version: '${parameters.app_new_version}'
+    spec:
+      containers:
+        - env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: k8s
+          image: 'dtlabs/recommendation-service:${parameters.image_tag}'
+          imagePullPolicy: Always
+          name: recommendation-service
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              cpu: '0.5'
+              memory: 1Gi
+            requests:
+              cpu: '0.25'
+              memory: 256Mi
