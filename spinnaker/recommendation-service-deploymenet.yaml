@@ -20,7 +20,7 @@
           - env:
               - name: SPRING_PROFILES_ACTIVE
                 value: k8s
-            image: 'dtlabs/recommendation-service:${parameters.image_version}'
+            image: 'dtlabs/recommendation-service:${parameters.image_tag}'
             imagePullPolicy: Always
             name: recommendation-service
             ports:
