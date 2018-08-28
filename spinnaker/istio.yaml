@@ -6,12 +6,12 @@ metadata:
 spec:
   host: recommendation-service
   subsets:
-  - name: v2
+  - name: ${parameters.app_old_version}
     labels:
-      version: v2
-  - name: v3
+      version: ${parameters.app_old_version}
+  - name: ${parameters.app_new_version}
     labels:
-      version: v3
+      version: ${parameters.app_new_version}
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -25,9 +25,9 @@ spec:
   - route: 
     - destination:
         host: recommendation-service
-        subset: v2
+        subset: ${parameters.app_old_version}
       weight:50
     - destination:
         host: recommendation-service
-        subset: v3
+        subset: ${parameters.app_new_version}
       weight: 50
