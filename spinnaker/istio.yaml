@@ -26,7 +26,7 @@ spec:
     - destination:
         host: recommendation-service
         subset: ${parameters.app_old_version}
-      weight:50
+      weight: 50
     - destination:
         host: recommendation-service
         subset: ${parameters.app_new_version}
