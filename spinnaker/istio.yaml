@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: recommendation-service
-  namespace: 'ns-zcp-edu-${parameters.namespace_number}'
+  namespace: ${parameters.namespace}
 spec:
   host: recommendation-service
   subsets:
@@ -17,7 +17,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: recommendation-service
-  namespace: 'ns-zcp-edu-${parameters.namespace_number}'
+  namespace: ${parameters.namespace}
 spec:
   hosts:
     - recommendation-service
