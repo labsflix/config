@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: recommendation-service
-  namespace: ${parameters.namespace}
+  namespace: '${parameters.namespace}'
 spec:
   host: recommendation-service
   subsets:
@@ -17,7 +17,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: recommendation-service
-  namespace: ${parameters.namespace}
+  namespace: '${parameters.namespace}'
 spec:
   hosts:
     - recommendation-service
@@ -26,8 +26,8 @@ spec:
         - destination:
             host: recommendation-service
             subset: '${parameters.app_old_version}'
-          weight: 50
+          weight: 0
         - destination:
             host: recommendation-service
             subset: '${parameters.app_new_version}'
-          weight: 50
+          weight: 100
